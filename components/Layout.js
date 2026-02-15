@@ -2,47 +2,55 @@ import Link from "next/link";
 
 export default function Layout({ children }) {
   return (
-    <div className="container">
-      <header className="nav2">
-        <div className="brand2">
-          <div className="logoMark" aria-hidden="true" />
-          <div className="brandText">
-            <span className="brandName">24shoots</span>
-            <span className="brandSub">by @telanganainlast24hr</span>
-          </div>
-          <span className="badge2">Political • GHMC</span>
-        </div>
+    <>
+      <header className="nav">
+        <div className="container navInner">
+          <Link className="brand" href="/">
+            <span className="logoMark" aria-hidden="true" />
+            <span>
+              24shoots
+              <small>Instant reels • Political leaders</small>
+            </span>
+          </Link>
 
-        <nav className="navlinks2">
-          <Link href="/" className="navlink">Home</Link>
-          <Link href="/pricing" className="navlink">Pricing</Link>
-          <Link href="/faq" className="navlink">FAQ</Link>
-          <Link href="/contact" className="navlink">Contact</Link>
-          <Link href="/terms" className="navlink">Terms</Link>
-          <Link href="/admin" className="pill">Admin</Link>
-          <Link className="btn primary" href="/book">Book Now</Link>
-        </nav>
+          <nav className="navLinks">
+            <Link href="/">Home</Link>
+            <Link href="/pricing">Pricing</Link>
+            <Link href="/book">Book Now</Link>
+            <Link href="/faq">FAQ</Link>
+            <Link href="/terms">Terms</Link>
+          </nav>
+
+          <div className="ctaRow">
+            <a
+              className="btn btnGhost"
+              href={`https://wa.me/${process.env.NEXT_PUBLIC_ADMIN_WHATSAPP || "7989175554"}?text=${encodeURIComponent(
+                "Hi, I want to book a 24shoots political reel in GHMC Hyderabad."
+              )}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              WhatsApp
+            </a>
+            <Link className="btn btnPrimary" href="/book">
+              Book in 60s
+            </Link>
+          </div>
+        </div>
       </header>
 
-      <div className="topbar2">
-        <div className="tbItem"><b>Instant booking</b> after payment verification</div>
-        <div className="tbDot">•</div>
-        <div className="tbItem"><b>Same‑day slots</b> in GHMC</div>
-        <div className="tbDot">•</div>
-        <div className="tbItem"><b>Delivery under 30 mins</b> after shoot</div>
-        <div className="tbDot">•</div>
-        <div className="tbItem"><b>Full refund</b> + free reschedule (2 days)</div>
-      </div>
-
-      {children}
+      <main>{children}</main>
 
       <footer className="footer">
-        <div>© {new Date().getFullYear()} 24shoots • GHMC Hyderabad only • Bookings confirmed only after payment verification.</div>
+        <div className="container footerGrid">
+          <div>
+            <b style={{ color: "rgba(255,255,255,0.88)" }}>24shoots</b> — on-ground iPhone reel team for political leaders (GHMC).
+            <br />
+            <small>Pay & book instantly. Slot confirmed after payment verification.</small>
+          </div>
+          <small>© {new Date().getFullYear()} 24shoots</small>
+        </div>
       </footer>
-
-      <div className="stickybar">
-        <Link className="btn primary full" href="/book">Pay & Book Now</Link>
-      </div>
-    </div>
+    </>
   );
 }

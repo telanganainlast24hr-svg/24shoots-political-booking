@@ -1,87 +1,106 @@
+import Layout from "@/components/Layout";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const STATUS = ["NEW","CONFIRMED","ASSIGNED","COMPLETED","RESCHEDULED","REFUNDED","CANCELLED"];
-
-export default function AdminBooking() {
+export default function BookingDetail() {
   const router = useRouter();
-  const { id } = router.query;
-  const [data, setData] = useState(null);
+  const id = router.query.id?.toString() || "";
+  const [item, setItem] = useState(null);
   const [status, setStatus] = useState("CONFIRMED");
   const [notes, setNotes] = useState("");
-  const [err, setErr] = useState("");
-  const [ok, setOk] = useState("");
+  const [msg, setMsg] = useState("");
 
   async function load() {
-    setErr(""); setOk("");
-    const r = await fetch(`/api/admin/booking?bookingId=${encodeURIComponent(id||"")}`);
-    const d = await r.json();
-    if (!r.ok) {
-      if (r.status === 401) router.push("/admin/login");
-      else setErr(d?.error || "Failed");
-      return;
+    const r = await fetch(`/api/admin/booking?id=${encodeURIComponent(id)}`);
+    if (r.status === 401) { router.push("/admin/login"); return; }
+    const j = await r.json();
+    if (r.ok) {
+      setItem(j.item);
+      setStatus(j.item.status);
+      setNotes(j.item.notes || "");
     }
-    setData(d);
-    setStatus(d.status);
-    setNotes(d.notes || "");
   }
+
   useEffect(() => { if (id) load(); }, [id]);
 
   async function save() {
-    setErr(""); setOk("");
+    setMsg("");
     const r = await fetch("/api/admin/update", {
-      method:"POST", headers:{ "Content-Type":"application/json" },
-      body: JSON.stringify({ bookingId: id, status, notes })
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ bookingId: id, status, notes }),
     });
-    const d = await r.json();
-    if (!r.ok) return setErr(d?.error || "Save failed");
-    setOk("Saved ✅");
-    load();
+    const j = await r.json();
+    if (!r.ok) setMsg(j.error || "Failed");
+    else { setMsg("Saved ✅"); setItem(j.item); }
   }
 
+  if (!id) return null;
+
   return (
-    <main>
-      <div className="h1">Booking</div>
-      {err && <div className="error">{err}</div>}
-      {ok && <div className="ok">{ok}</div>}
-      {data && (
-        <div className="card">
-          <div className="cardhead">
-            <div>
-              <div className="small">Booking ID</div>
-              <div style={{fontSize:22, fontWeight:900}}>{data.bookingId}</div>
-              <div className="small">Payment: {data.razorpayPaymentId || "-"}</div>
+    <Layout>
+      <section className="section" style={{ paddingTop: 26 }}>
+        <div className="container" style={{ maxWidth: 820 }}>
+          <div className="sectionTitle">
+            <h2>Booking {id}</h2>
+            <p>Update status/notes and coordinate.</p>
+          </div>
+
+          <div className="panel">
+            <div className="panelBody">
+              {item ? (
+                <>
+                  <div className="grid3" style={{ gridTemplateColumns: "1fr 1fr 1fr" }}>
+                    <div className="card"><h3>Name</h3><p>{item.name}</p></div>
+                    <div className="card"><h3>Phone</h3><p>{item.phone}</p></div>
+                    <div className="card"><h3>Package</h3><p>{item.packageType === "2_reels" ? "2 reels" : "1 reel"}</p></div>
+                  </div>
+
+                  <div className="grid3" style={{ gridTemplateColumns: "1fr 1fr 1fr", marginTop: 12 }}>
+                    <div className="card"><h3>Date</h3><p>{item.date}</p></div>
+                    <div className="card"><h3>Time</h3><p>{item.time}</p></div>
+                    <div className="card"><h3>Status</h3><p>{item.status}</p></div>
+                  </div>
+
+                  <div className="card" style={{ marginTop: 12 }}>
+                    <h3>Location</h3>
+                    <p style={{ marginBottom: 0 }}>{item.location}</p>
+                    {item.mapsLink ? <p style={{ marginTop: 10 }}><a className="btn" href={item.mapsLink} target="_blank" rel="noreferrer">Open maps</a></p> : null}
+                  </div>
+
+                  <div className="hr" />
+
+                  <div className="formGrid">
+                    <div className="field">
+                      <label>Status</label>
+                      <select value={status} onChange={(e) => setStatus(e.target.value)}>
+                        <option value="CONFIRMED">CONFIRMED</option>
+                        <option value="IN_PROGRESS">IN_PROGRESS</option>
+                        <option value="DELIVERED">DELIVERED</option>
+                        <option value="CANCELLED">CANCELLED</option>
+                        <option value="REFUNDED">REFUNDED</option>
+                      </select>
+                    </div>
+                    <div className="field" style={{ gridColumn: "1 / -1" }}>
+                      <label>Notes</label>
+                      <textarea rows="4" value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Internal notes…" />
+                    </div>
+                  </div>
+
+                  <div style={{ display: "flex", gap: 10, alignItems: "center", marginTop: 12, flexWrap: "wrap" }}>
+                    <button className="btn btnPrimary" onClick={save}>Save</button>
+                    <button className="btn" onClick={() => router.push("/admin")}>Back</button>
+                    {msg ? <span className="help">{msg}</span> : null}
+                  </div>
+                </>
+              ) : (
+                <div className="help">Loading…</div>
+              )}
             </div>
-            <div className="pill">{data.status}</div>
           </div>
 
-          <div className="hr"></div>
-          <div className="grid" style={{gap:8}}>
-            <div><span className="small">Name:</span> <b>{data.name}</b></div>
-            <div><span className="small">Phone:</span> <b>{data.phone}</b></div>
-            <div><span className="small">Date & Time:</span> <b>{data.date}</b> • <b>{data.time}</b></div>
-            <div><span className="small">Location:</span> <b>{data.location}</b></div>
-            {data.mapsLink ? <div><span className="small">Maps:</span> <a href={data.mapsLink} target="_blank" rel="noreferrer"><u>Open link</u></a></div> : null}
-            <div><span className="small">Package:</span> <b>{data.packageLabel}</b></div>
-            <div><span className="small">Amount:</span> <b>₹{data.amount}</b></div>
-          </div>
-
-          <div className="hr"></div>
-          <label className="label">Status</label>
-          <select className="input" value={status} onChange={(e)=>setStatus(e.target.value)}>
-            {STATUS.map(s => <option key={s} value={s}>{s}</option>)}
-          </select>
-
-          <label className="label">Notes (manual creator assignment, etc.)</label>
-          <textarea className="input" rows="4" value={notes} onChange={(e)=>setNotes(e.target.value)} placeholder="E.g., Assigned: Charan 6281010170"></textarea>
-
-          <div style={{marginTop:12, display:"flex", gap:10, flexWrap:"wrap"}}>
-            <button className="btn primary" onClick={save}>Save</button>
-            <button className="btn ghost" onClick={load}>Refresh</button>
-            <button className="btn ghost" onClick={()=>router.push("/admin")}>Back</button>
-          </div>
         </div>
-      )}
-    </main>
+      </section>
+    </Layout>
   );
 }

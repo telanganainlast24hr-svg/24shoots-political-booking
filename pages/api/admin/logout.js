@@ -1,7 +1,15 @@
-import { clearAdminCookie } from "../../../lib/auth";
+import { serialize } from "cookie";
 
-export default async function handler(req, res) {
-  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
-  clearAdminCookie(res);
-  return res.status(200).json({ ok: true });
+export default function handler(req, res) {
+  res.setHeader(
+    "Set-Cookie",
+    serialize("admin_token", "", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 0,
+    })
+  );
+  res.status(200).json({ ok: true });
 }

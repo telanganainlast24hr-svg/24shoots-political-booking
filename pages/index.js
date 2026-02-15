@@ -1,239 +1,203 @@
+import Layout from "@/components/Layout";
 import Link from "next/link";
-
-function Icon({ children }) {
-  return <span className="icon" aria-hidden="true">{children}</span>;
-}
-
-function Check() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-      <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  );
-}
-
-function Bolt() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-      <path d="M13 2L3 14h7l-1 8 12-14h-7l-1-6z" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  );
-}
-
-function Shield() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-      <path d="M12 2l8 4v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6l8-4z" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M9.5 12.2l1.8 1.8 3.6-3.8" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  );
-}
 
 export default function Home() {
   return (
-    <main>
-      <section className="hero2">
-        <div className="hero2Grid">
-          <div className="heroCopy">
-            <div className="kicker">
-              <span className="kdot" />
-              <span>For political leaders</span>
-              <span className="ksep">•</span>
-              <span>GHMC Hyderabad</span>
-              <span className="ksep">•</span>
-              <span>Pay & book instantly</span>
-            </div>
-
-            <h1 className="heroTitle">
-              Flash‑fast political reels that look <span className="accentText">premium</span>.
-            </h1>
-
-            <p className="heroSub">
-              Choose <b>1 Reel</b> or <b>2 Reels</b>, pay via <b>UPI/Razorpay</b>, and your slot is confirmed.
-              We shoot on‑ground and deliver a <b>post‑ready reel under 30 minutes after the shoot</b>.
-              <span className="mutedLine">No raw clips • No revisions</span>
+    <Layout>
+      <section className="hero">
+        <div className="container heroGrid">
+          <div>
+            <div className="kicker"><span className="kickerDot" /> GHMC Hyderabad • Political leaders only</div>
+            <h1 className="h1">Pay & book a political reel shoot — in under 60 seconds.</h1>
+            <p className="sub">
+              24shoots is an on-ground iPhone reel team for political leaders and teams.
+              We shoot fast, edit fast, and deliver the final reel <b>within 30 minutes after the shoot</b>.
+              Slot is confirmed only after payment verification.
             </p>
 
-            <div className="ctaRow2">
-              <Link className="btn primary" href="/book">Pay & Book Now</Link>
-              <a className="btn ghost" href="https://wa.me/917989175554" target="_blank" rel="noreferrer">
-                WhatsApp to Confirm
-              </a>
+            <div className="ctaRow" style={{ marginTop: 8 }}>
+              <Link className="btn btnPrimary" href="/book">Book Now</Link>
+              <Link className="btn" href="/pricing">See Pricing</Link>
             </div>
 
-            <div className="proofRow">
-              <div className="proofPill"><Icon><Bolt/></Icon> Same‑day bookings</div>
-              <div className="proofPill"><Icon><Shield/></Icon> Full refund policy</div>
-              <div className="proofPill"><Icon><Check/></Icon> Verified payment = confirmed slot</div>
-            </div>
-
-            <div className="miniNote">
-              Powered by <b>@telanganainlast24hr</b> (107k+ community). Bookings handled personally.
+            <div className="heroBadges">
+              <div className="badge"><strong>Under 30 min</strong> delivery</div>
+              <div className="badge"><strong>Same-day</strong> bookings</div>
+              <div className="badge"><strong>No raw clips</strong> • No revisions</div>
+              <div className="badge"><strong>Full refund</strong> + reschedule</div>
             </div>
           </div>
 
-          <div className="heroMock">
-            <div className="mockCard">
-              <div className="mockTop">
-                <div>
-                  <div className="mockTitle">Book in ~60 seconds</div>
-                  <div className="mockSub">Pay → auto‑verify → confirmed</div>
-                </div>
-                <div className="mockBadge">UPI</div>
+          <div className="panel">
+            <div className="panelHead">
+              <div className="panelTitle">
+                <h3>Book like an app</h3>
+                <span className="pill">Fast checkout</span>
+              </div>
+            </div>
+            <div className="panelBody">
+              <div className="notice">
+                ✅ Your slot is confirmed only after payment verification.
+                <br />You’ll get a Booking ID instantly.
               </div>
 
-              <div className="mockSteps">
+              <div className="steps">
                 <div className="step">
-                  <span className="stepNum">1</span>
-                  <div>
-                    <div className="stepTitle">Choose package</div>
-                    <div className="stepText">1 Reel ₹1,899 • 2 Reels ₹3,499</div>
+                  <div className="stepNum">1</div>
+                  <div className="stepText">
+                    <b>Choose package</b>
+                    <span>1 reel or 2 reels. Clear timing limits.</span>
                   </div>
                 </div>
                 <div className="step">
-                  <span className="stepNum">2</span>
-                  <div>
-                    <div className="stepTitle">Enter details</div>
-                    <div className="stepText">Name, phone, date, time, location</div>
+                  <div className="stepNum">2</div>
+                  <div className="stepText">
+                    <b>Pay via UPI</b>
+                    <span>Razorpay checkout. Secure verification.</span>
                   </div>
                 </div>
                 <div className="step">
-                  <span className="stepNum">3</span>
-                  <div>
-                    <div className="stepTitle">Pay & lock slot</div>
-                    <div className="stepText">Instant confirmation after verification</div>
+                  <div className="stepNum">3</div>
+                  <div className="stepText">
+                    <b>We shoot + deliver</b>
+                    <span>Under 30 min delivery after shoot completion.</span>
                   </div>
                 </div>
               </div>
 
-              <div className="mockLine" />
-
-              <div className="mockList">
-                <div className="ml"><Icon><Check/></Icon> On‑ground shoot: up to 2h / 4h</div>
-                <div className="ml"><Icon><Check/></Icon> Delivery: under 30 mins after shoot</div>
-                <div className="ml"><Icon><Check/></Icon> GHMC Hyderabad only</div>
+              <div style={{ marginTop: 14, display: "grid", gap: 10 }}>
+                <Link className="btn btnPrimary" href="/book">Book in 60s</Link>
+                <a className="btn" href="#proof">Add sample reels (recommended)</a>
               </div>
 
-              <Link className="btn primary full" href="/book">Confirm a Slot</Link>
-              <div className="mockFoot">Tip: share Google Maps link to avoid delays.</div>
+              <div className="help" style={{ marginTop: 10 }}>
+                Tip: your conversion goes up massively when you add 3 sample reels on the homepage.
+              </div>
             </div>
-
-            <div className="glow" aria-hidden="true" />
           </div>
         </div>
       </section>
 
-      <section className="section">
-        <h2 className="sectionTitle">How it works</h2>
-        <div className="grid3">
-          <div className="card">
-            <div className="cardIcon"><Bolt/></div>
-            <div className="h2">Pay & book instantly</div>
-            <p className="p">Your slot is confirmed only after Razorpay verification. No waiting, no back‑and‑forth.</p>
+      <section className="section" id="proof">
+        <div className="container">
+          <div className="sectionTitle">
+            <h2>Proof that this works</h2>
+            <p>Add 3 of your best reels here. People pay faster when they can see the style instantly.</p>
           </div>
-          <div className="card">
-            <div className="cardIcon"><Check/></div>
-            <div className="h2">We shoot on‑ground</div>
-            <p className="p">Professional iPhone workflow. One‑take storytelling built for political content.</p>
-          </div>
-          <div className="card">
-            <div className="cardIcon"><Shield/></div>
-            <div className="h2">Fast delivery</div>
-            <p className="p">Get a post‑ready reel under 30 minutes after the shoot. Clean captions and pacing.</p>
-          </div>
-        </div>
-      </section>
 
-      <section className="section">
-        <div className="split">
-          <div>
-            <h2 className="sectionTitle">What you get</h2>
-            <ul className="list">
-              <li><b>1 or 2 finished reels</b> (vertical, post‑ready)</li>
-              <li><b>On‑ground shoot time</b>: up to 2h (1 reel) / up to 4h (2 reels)</li>
-              <li><b>Same‑day bookings</b> available</li>
-              <li><b>No raw clips</b> • <b>No revisions</b> (fast workflow)</li>
-              <li><b>Full refund</b> + <b>free reschedule within 2 days</b></li>
-            </ul>
-            <div className="ctaInline">
-              <Link className="btn primary" href="/book">Book Now</Link>
-              <Link className="btn ghost" href="/pricing">View packages</Link>
+          <div className="grid3">
+            <div className="card">
+              <div className="icon">▶</div>
+              <h3>Sample Reel #1</h3>
+              <p>Replace this card with your best political reel (Instagram link).</p>
             </div>
-          </div>
-
-          <div className="card highlightCard">
-            <div className="h2">Built to convert</div>
-            <p className="p">
-              Most people don’t buy because they don’t trust the outcome.
-              This page is designed to remove doubt: clear deliverables, clear timing, clear refund policy.
-            </p>
-            <div className="hr" />
-            <div className="kv">
-              <span>Instant confirmation</span>
-              <span>WhatsApp support</span>
-              <span>GHMC‑only focus</span>
-              <span>Premium look</span>
+            <div className="card">
+              <div className="icon">▶</div>
+              <h3>Sample Reel #2</h3>
+              <p>Strong hook + crowd visuals convert the best.</p>
+            </div>
+            <div className="card">
+              <div className="icon">▶</div>
+              <h3>Sample Reel #3</h3>
+              <p>Before/after or rally highlights work well.</p>
             </div>
           </div>
         </div>
       </section>
 
       <section className="section">
-        <h2 className="sectionTitle">Packages</h2>
-        <div className="grid grid2">
-          <div className="card">
-            <div className="cardhead">
-              <div><div style={{fontWeight:950, fontSize:18}}>1 Reel</div><div className="small">Up to 2 hours shoot time</div></div>
-              <div className="price">₹1,899</div>
-            </div>
-            <div className="hr"></div>
-            <ul className="list"><li>Delivery under 30 minutes after shoot</li><li>GHMC Hyderabad only</li><li>No raw clips • No revisions</li></ul>
-            <div style={{marginTop:12}}><Link className="btn primary full" href="/book?pkg=1_reel">Pay & Book</Link></div>
+        <div className="container">
+          <div className="sectionTitle">
+            <h2>Why teams book 24shoots</h2>
+            <p>Clear deliverables. Clear time limits. No back-and-forth.</p>
           </div>
-
-          <div className="card">
-            <div className="cardhead">
-              <div><div style={{fontWeight:950, fontSize:18}}>2 Reels</div><div className="small">Up to 4 hours shoot time</div></div>
-              <div className="price">₹3,499</div>
+          <div className="grid3">
+            <div className="card">
+              <div className="icon">⚡</div>
+              <h3>Fast output</h3>
+              <p>We optimize for speed: shoot + edit pipeline designed for political teams.</p>
             </div>
-            <div className="hr"></div>
-            <ul className="list"><li>Delivery under 30 minutes after shoot</li><li>GHMC Hyderabad only</li><li>No raw clips • No revisions</li></ul>
-            <div style={{marginTop:12}}><Link className="btn primary full" href="/book?pkg=2_reels">Pay & Book</Link></div>
+            <div className="card">
+              <div className="icon">🧾</div>
+              <h3>Simple booking</h3>
+              <p>Pay and book instantly. Slot confirmed after verified payment — no ambiguity.</p>
+            </div>
+            <div className="card">
+              <div className="icon">🎯</div>
+              <h3>Designed for reach</h3>
+              <p>Hooks, framing and pacing built for Instagram Reels performance.</p>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="section">
-        <h2 className="sectionTitle">Add your sample reels</h2>
-        <p className="p">This is the #1 conversion lever. Replace these placeholders with 3 Instagram links from your best reels.</p>
-        <div className="grid3">
-          <div className="card sampleCard">
-            <div className="sampleTop">Sample Reel 1</div>
-            <div className="sampleLine">Paste Instagram link in code</div>
-            <div className="sampleHint">pages/index.js → “Add your sample reels”</div>
+        <div className="container">
+          <div className="sectionTitle">
+            <h2>Packages</h2>
+            <p>Pick the package, pay, and book instantly.</p>
           </div>
-          <div className="card sampleCard">
-            <div className="sampleTop">Sample Reel 2</div>
-            <div className="sampleLine">Paste Instagram link in code</div>
-            <div className="sampleHint">Replace placeholder text</div>
-          </div>
-          <div className="card sampleCard">
-            <div className="sampleTop">Sample Reel 3</div>
-            <div className="sampleLine">Paste Instagram link in code</div>
-            <div className="sampleHint">Keep it under 15–25s</div>
+
+          <div className="pricingGrid">
+            <div className="card" style={{ borderColor: "rgba(255,122,24,0.35)" }}>
+              <h3>1 Reel</h3>
+              <div className="price">₹1,899 <small>up to 2 hours</small></div>
+              <div className="hr" />
+              <ul className="list">
+                <li><span className="tick" /> 1 final reel delivered (under 30 min after shoot)</li>
+                <li><span className="tick" /> Same-day bookings allowed</li>
+                <li><span className="warn" /> No raw clips</li>
+                <li><span className="warn" /> No revisions</li>
+              </ul>
+              <div style={{ marginTop: 14 }}>
+                <Link className="btn btnPrimary" href="/book?pkg=1_reel">Book 1 Reel</Link>
+              </div>
+            </div>
+
+            <div className="card">
+              <h3>2 Reels</h3>
+              <div className="price">₹3,499 <small>up to 4 hours</small></div>
+              <div className="hr" />
+              <ul className="list">
+                <li><span className="tick" /> 2 final reels delivered (under 30 min after shoot)</li>
+                <li><span className="tick" /> Same-day bookings allowed</li>
+                <li><span className="warn" /> No raw clips</li>
+                <li><span className="warn" /> No revisions</li>
+              </ul>
+              <div style={{ marginTop: 14 }}>
+                <Link className="btn btnPrimary" href="/book?pkg=2_reels">Book 2 Reels</Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="section">
-        <div className="ctaFinal">
-          <div>
-            <div className="h2">Ready to book a slot?</div>
-            <p className="p">Pay now and get instant confirmation after verification. Same‑day slots available.</p>
+        <div className="container">
+          <div className="sectionTitle">
+            <h2>Policies (clear & strict)</h2>
+            <p>Clarity increases trust — and increases conversions.</p>
           </div>
-          <Link className="btn primary" href="/book">Pay & Book Now</Link>
+
+          <div className="grid3">
+            <div className="card">
+              <div className="icon">🧠</div>
+              <h3>Refunds</h3>
+              <p>Full refunds available for both packages.</p>
+            </div>
+            <div className="card">
+              <div className="icon">📅</div>
+              <h3>Reschedule</h3>
+              <p>Free reschedule within 2 days.</p>
+            </div>
+            <div className="card">
+              <div className="icon">📍</div>
+              <h3>Location</h3>
+              <p>GHMC Hyderabad only. If not GHMC, we won’t confirm.</p>
+            </div>
+          </div>
         </div>
       </section>
-    </main>
+    </Layout>
   );
 }
