@@ -76,7 +76,7 @@ export default function Book() {
         order_id: orderId,
         prefill: { name: name.trim(), contact: cleanPhone },
         notes: { bookingId },
-        theme: { color: "#22c55e" },
+        theme: { color: "#ff8a00" },
         handler: async function (response) {
           const vr = await fetch("/api/verify-payment", {
             method: "POST",
