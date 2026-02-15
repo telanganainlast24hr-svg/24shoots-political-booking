@@ -3,45 +3,45 @@ import Link from "next/link";
 export default function Layout({ children }) {
   return (
     <div className="container">
-      <header className="nav">
-        <div className="brand">
+      <header className="nav2">
+        <div className="brand2">
           <div className="logoMark" aria-hidden="true" />
-          <div style={{display:"flex", flexDirection:"column", lineHeight:1.1}}>
-            <span style={{fontSize:16}}>24shoots</span>
-            <span className="small">by @telanganainlast24hr</span>
+          <div className="brandText">
+            <span className="brandName">24shoots</span>
+            <span className="brandSub">by @telanganainlast24hr</span>
           </div>
-          <span className="badge">Political Leaders • GHMC</span>
+          <span className="badge2">Political • GHMC</span>
         </div>
 
-        <nav className="navlinks">
-          <Link href="/">Home</Link>
-          <Link href="/pricing">Pricing</Link>
-          <Link href="/faq">FAQ</Link>
-          <Link href="/contact">Contact</Link>
-          <Link href="/terms">Terms</Link>
+        <nav className="navlinks2">
+          <Link href="/" className="navlink">Home</Link>
+          <Link href="/pricing" className="navlink">Pricing</Link>
+          <Link href="/faq" className="navlink">FAQ</Link>
+          <Link href="/contact" className="navlink">Contact</Link>
+          <Link href="/terms" className="navlink">Terms</Link>
           <Link href="/admin" className="pill">Admin</Link>
           <Link className="btn primary" href="/book">Book Now</Link>
         </nav>
       </header>
 
-      <div className="topbar">
-        <span><b>Pay & book instantly</b> (Razorpay/UPI)</span>
-        <span>•</span>
-        <span><b>Same‑day slots</b> in GHMC</span>
-        <span>•</span>
-        <span><b>Delivery under 30 mins</b> after shoot</span>
-        <span>•</span>
-        <span><b>Full refund</b> + free reschedule (2 days)</span>
+      <div className="topbar2">
+        <div className="tbItem"><b>Instant booking</b> after payment verification</div>
+        <div className="tbDot">•</div>
+        <div className="tbItem"><b>Same‑day slots</b> in GHMC</div>
+        <div className="tbDot">•</div>
+        <div className="tbItem"><b>Delivery under 30 mins</b> after shoot</div>
+        <div className="tbDot">•</div>
+        <div className="tbItem"><b>Full refund</b> + free reschedule (2 days)</div>
       </div>
 
       {children}
 
       <footer className="footer">
-        <div>© {new Date().getFullYear()} 24shoots • GHMC Hyderabad only • Bookings confirmed only after payment.</div>
+        <div>© {new Date().getFullYear()} 24shoots • GHMC Hyderabad only • Bookings confirmed only after payment verification.</div>
       </footer>
 
       <div className="stickybar">
-        <Link className="btn primary full" href="/book">Pay & Confirm Booking</Link>
+        <Link className="btn primary full" href="/book">Pay & Book Now</Link>
       </div>
     </div>
   );
